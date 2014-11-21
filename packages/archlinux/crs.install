@@ -1,0 +1,3 @@
+post_install() {
+  echo "-- Edit /etc/crs.conf and define \"url\" variable."
+}

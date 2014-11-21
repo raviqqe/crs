@@ -1,0 +1,176 @@
+.TH CRS 1 crs\-VERSION
+.SH NAME
+crs \- combat ready status / configuration-file redistribution system
+.SH SYNOPSIS
+crs [\-v] [\-q] [\-m <message>] [\-c <file>] <subcommand> [<argument>...]
+.br
+crs { backup | bu } [<path>...]
+.br
+crs { restore | rs } [<path>...]
+.br
+crs { list | ls } [<path>...]
+.br
+crs { remove | rm } <path>...
+.br
+crs { merge | mg } <path>... <subset>
+.br
+crs { checkout | co }
+.br
+crs { update | ud }
+.br
+crs { commit | ci }
+.br
+crs { wrap | wr } <command> <argument>...
+.br
+crs <vcscommand> <argument>...
+.SH DESCRIPTION
+crs backs up and restores files and directories listed in its configuration file with the VCS repository.
+It has three parts; One is the program to back up files and directories.
+Another is the one to restore them.
+The others are the ones to manage the VCS repository.
+.P
+Before the first run, you must edit the CONFFILE to specify the repository URL.
+See
+.I Configuration file
+subsection. Then, on the first run, crs makes the first checkout of the repository copy.
+.P
+The supported VCS commands are
+.IR svn (1)
+and
+.IR git (1).
+.SH OPTIONS
+.TP
+.B \-v
+print verbose messages.
+.TP
+.B \-q
+print nothing without error messages.
+.TP
+.B \-c <conffile>
+Set
+.I <conffile>
+as the configuration file.
+.TP
+.B \-m <message>
+Set <message> as the commitment message. This is valid with the subcommands, backup (bu), remove (rm),
+merge (mg), and commit (ci), which commit to the repository.
+.SH USAGE
+.SS Subcommands
+backup (bu), restore (rs), and remove (rm) subcommands check out or update the repositroy copy before processing
+and commit changes to the repositrory after it. Therefore, checkout (co), update (ud), and commit subcommands
+are not necessary with them.
+.TP
+backup, bu [<path>...]
+backs up files and directories listed in the configuration file, CONFFILE.
+When <path>... is specified, the files or directories of <path>... are backed up while the configuration file
+is not used.
+.TP
+restore, rs [<path>...]
+restores files and directories in the specified subsets.
+If no subset is specified, the 'default' subset will be restored.
+<path> consists of <subset><pathtofile>. See EXAMPLE.
+Wildcards are available in <path>, but it should be escaped like \\*, \\?, and \\[...\\].
+.TP
+list, ls [<path>...]
+lists up subsets or files and directories in them.
+If no path is specified, it lists up all subsets.
+<path> consists of <subset><pathtofile>. See EXAMPLE.
+Wildcards are available in <path>, but it should be escaped like \\*, \\?, and \\[...\\].
+.TP
+remove, rm <path>...
+removes subsets or files and directories in them.
+If no path is specified, nothing happens.
+<path> consists of <subset><pathtofile>. See EXAMPLE.
+Wildcards are available in <path>, but it should be escaped like \\*, \\?, and \\[...\\].
+.TP
+merge, mg <path>... <subset>
+cp files and directories of <path>... into <subset>.
+<path> consists of <subset><pathtofile>. See EXAMPLE.
+Wildcards are available in <path>, but it should be escaped like \\*, \\?, and \\[...\\].
+.TP
+wrap, wr <command> <argument>...
+commits changes of the repository copy before and after executing <commmand> <argument>...
+.TP
+checkout, co
+checks out the repository copy if it is not done yet.
+.TP
+update, ud
+updates the repository copy.
+.TP
+commit, ci <path>...
+commits changes of the repository copy to the repository.
+.TP
+<vcscommand> <argument>...
+passes the arguments to VCS commands as <vcscommand>,
+.IR svn (1)
+or
+.IR git (1).
+This commands behaves as if it was executed in the root directory of the repository copy.
+Asterisks can be used as escaped into \\*.
+.SS Configuration file
+The configuration file consists of two parts. One is the variable definition part.
+The other is the list of files and directories which are backed up to the repository.
+In this file, the variable, 'url' which specifies the url of the repository must be defined.
+.P
+url=svn://example.com/foo
+.P
+You can also use "" or '' as well as shell script. The lines below are equivalent to the above.
+.P
+url='svn://example.com/foo'
+.br
+url="svn://example.com/foo"
+.P
+Variables of any names except 'url' can be defined to be used in the list of files and directories.
+Any blank or tab cannot be present just before and after equals signs to define variables.
+The way to refer variables is the same as shell script:
+specify variable's name adding dollar sign $ just before it.
+.P
+home=/home/myuser
+.P
+The list of files and directories should be like the below.
+.P
+/etc/*.conf
+.br
+/usr/share      linux
+.br
+/usr/local/etc  linux-debian
+.br
+/srv            websrv-www.example.com
+.P
+The first field specifies files or directories to be backed up with their full paths.
+The second field specifies the subsets where the files or directories
+in its first one in the records will be stored.
+If no second field is specified, the subsets of its files or directories in the records will be "default".
+Between the first fields and the second ones, there should be spaces or tabs
+and should not be the other characters. The second field cannot includes any slash /
+because it's used in filesystem's path names.
+Asterisks * can be used in the first field, but not in the second one.
+.P
+Variables defined in the variable definition part can be used for usefulness.
+.P
+${home}/.bashrc  linux
+.P
+Neither persent sign % nor equals mark = is available in the configuration file.
+.SH FILES
+CONFFILE - the configuration file
+.br
+VCSROOT - the directory of the repository copy
+.SH EXAMPLE
+.TP
+crs rm default linux/etc
+removes the 'default' subset and '/etc' directory in the 'linux' subset.
+.TP
+crs rm \\*
+removes all subsets.
+.TP
+crs ls default freebsd/usr/local/etc
+lists all files in 'default' subset and '/usr/local/etc' directory in the 'freebsd' subset.
+.SH SEE ALSO
+.IR svn (1),
+.IR git (1)
+.SH BUGS
+When you restores files or directories which do not exist in the system yet,
+crs will set the permission parameters of their parent directories as theirs.
+If you do not hope that, you have to set them manually.
+There can be other bugs. Please report them and any requests
+to the developper, raviqqe <raviqqe@gmail.com>.

@@ -18,16 +18,10 @@ URL=
 VCSC=
 MESSAGE="commitment from `hostname`-`uname`"
 # os specific
-#PATH=${PATH:=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin}
-CONFFILE="/etc/${NAME}.conf"
-# freebsd: /usr/local/etc/${NAME}.conf
-# arch linux: /etc/${NAME}.conf
-VCSROOT="/var/${NAME}"
-# freebsd: /usr/local/var/${NAME}
-# arch linux: /var/${NAME}
-LIBPATH="/usr/lib/${NAME}"
-# freebsd: /usr/local/libexec/${NAME}
-# arch linux: /usr/lib/${NAME}
+PATH=${PATH:-'/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'}
+CONFFILE="/usr/local/etc/${NAME}.conf"
+VCSROOT="/usr/local/var/${NAME}"
+LIBPATH="/usr/local/lib/${NAME}"
 readonly NAME PATH VCSROOT LIBPATH
 
 

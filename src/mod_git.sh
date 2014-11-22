@@ -43,6 +43,9 @@ vcs_remove() {
 
 ## vcs_commit
 vcs_commit() {
-  git commit -m "$MESSAGE" $VCSROOT
-  git push origin master
+  (
+    cd $VCSROOT
+    git commit -m "$MESSAGE"
+    git push origin master
+  )
 }

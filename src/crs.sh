@@ -302,12 +302,6 @@ wrap() {
       b)
         before=0
         ;;
-  while getopts ba option
-  do
-    case "$option" in
-      b)
-        before=0
-        ;;
       a)
         after=0
         ;;

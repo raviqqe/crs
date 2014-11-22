@@ -1,7 +1,5 @@
 # crs - combat ready status
 # See LICENSE file for copyright and license details.
-# $() and ${} is equivalent, but the former is modern.
-# variables undefined here: DESTDIR PREFIX MANPREFIX
 
 VERSION = 0.01
 BINDIR = $(DESTDIR)$(PREFIX)/bin
@@ -12,7 +10,7 @@ MANDIR = $(DESTDIR)$(MANPREFIX)/man/man1
 
 crs.conf:
 	@echo "creating $@ in $(CONFDIR) from crs.conf.sample"
-	@cp -fT crs.conf.sample $(CONFDIR)/$@
+	@cp -f crs.conf.sample $(CONFDIR)/$@
 	@chmod 644 $(CONFDIR)/$@
 
 clean:
@@ -21,7 +19,7 @@ clean:
 install: crs.conf 
 	@echo "installing executable file to $(BINDIR)"
 	@mkdir -p $(BINDIR)
-	@cp -fT crs.sh $(BINDIR)/crs
+	@cp -f crs.sh $(BINDIR)/crs
 	@chmod 755 $(BINDIR)/crs
 	@echo "installing module files to $(LIBDIR)"
 	@mkdir -p $(LIBDIR)/crs

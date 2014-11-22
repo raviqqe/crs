@@ -17,11 +17,10 @@ VALIDVCSC='svn git'
 URL=
 VCSC=
 MESSAGE="commitment from `hostname`-`uname`"
-# os specific
-PATH=${PATH:-'/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'}
+: ${PATH:='/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'}
 CONFFILE="/usr/local/etc/${NAME}.conf"
 VCSROOT="/usr/local/var/${NAME}"
-LIBPATH="/usr/local/lib/${NAME}"
+LIBPATH="/usr/local/libexec/${NAME}"
 readonly NAME PATH VCSROOT LIBPATH
 
 
@@ -146,12 +145,6 @@ backup() {
     while read file subset rest <&3
     do
       linenum=`expr $linenum + 1`
-      printout "processing ${linenum}th record: $file $subset $rest"
-
-      # check if $file and $subset are valid
-      test -n "$rest" &&
-        fail "there are more than 2 fields at the ${linenum}th record in $CONFFILE"
-      check_filename "$file"
       check_subsetname "$subset"
 
       copy_files "${subset:-$DFLTSUBSET}" "$file"
@@ -303,6 +296,12 @@ list() {
 wrap() {
   before=1
   after=1
+  while getopts ba option
+  do
+    case "$option" in
+      b)
+        before=0
+        ;;
   while getopts ba option
   do
     case "$option" in

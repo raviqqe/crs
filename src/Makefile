@@ -3,16 +3,11 @@
 # $() and ${} is equivalent, but the former is modern.
 # variables undefined here: DESTDIR PREFIX MANPREFIX
 
-PREFIX = /usr
-MANPREFIX = /usr/share
-
 VERSION = 0.01
 BINDIR = $(DESTDIR)$(PREFIX)/bin
-LIBDIR = $(DESTDIR)$(PREFIX)/lib
-#LIBDIR = $(DESTDIR)$(PREFIX)/libexec
-CONFDIR = $(DESTDIR)/etc
-#CONFDIR = $(DESTDIR)$(PREFIX)/etc
-REPOSDIR = $(DESTDIR)/var
+LIBDIR = $(DESTDIR)$(PREFIX)/libexec
+CONFDIR = $(DESTDIR)$(PREFIX)/etc
+REPOSDIR = $(DESTDIR)$(PREFIX)/var
 MANDIR = $(DESTDIR)$(MANPREFIX)/man/man1
 
 crs.conf:

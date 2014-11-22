@@ -1,3 +1,0 @@
-
-urxvt &
-exec dwm

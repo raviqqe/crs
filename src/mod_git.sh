@@ -24,7 +24,10 @@ vcs_checkout() {
 
 ## vcs_update
 vcs_update() {
-  git pull $VCSROOT
+  (
+    cd $VCSROOT
+    git pull
+  )
 }
 
 ## vcs_add <path>...
@@ -45,6 +48,7 @@ vcs_remove() {
 vcs_commit() {
   (
     cd $VCSROOT
+    git add *
     git commit -m "$MESSAGE"
     git push origin master
   )

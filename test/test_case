@@ -1,0 +1,35 @@
+no url
+no vcs
+arbitrary variables
+
+file list:
+  /etc/rc.conf
+  ${home}/*/.*rc
+
+crs
+crs backup
+crs bu
+crs bu -s <subset> <file>
+crs bu -s <subset> <file> <file>
+crs restore
+crs rs
+crs checkout
+crs co
+crs remove
+crs rm
+crs rm <subset>
+crs rm <subset>/<file>
+crs rm <subset>/<file> (with wildcards)
+crs rm <subset>/<file> <subset>/<file>
+crs merge
+crs merge <subset>/<file> <subset>
+crs list
+crs ls
+crs ls <subset>
+crs ls <subset>/<directory>
+crs ls <subset> <subset>
+crs wrap echo fooooooooooooooooooooooooooooooooo
+crs wrap -b echo fooooooooooooooooooooooooooooooooo
+crs wrap -a echo fooooooooooooooooooooooooooooooooo
+crs git status
+crs svn status

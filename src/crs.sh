@@ -124,7 +124,8 @@ copy_files() {
 }
 
 backup() {
-  vcs_checkout || vcs_update
+  vcs_checkout || vcs_update ||
+    fail "cannot checkout the repository, $URL"
   printout 'starting backup...'
 
   if [ -z "$*" ]
@@ -190,7 +191,8 @@ exist_dir() {
 }
 
 restore() {
-  vcs_checkout || vcs_update
+  vcs_checkout || vcs_update ||
+    fail "cannot check out the repository, $URL"
   printout 'starting restoration...'
   if [ -z "$*" ]
   then
@@ -383,6 +385,7 @@ then
   printerr 'set url variable like the below'
   fail "url=svn://example.com/$NAME"
 fi
+URL=$url
 
 if [ -n "$vcs" -a -n "`echo "$VALIDVCSC" | grep "$vcs"`" ]
 then

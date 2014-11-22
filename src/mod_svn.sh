@@ -22,7 +22,7 @@ vcs_checkout() {
   then
     return 1
   else
-    svn checkout "$url" $VCSROOT
+    svn checkout "$URL" $VCSROOT
   fi
 }
 

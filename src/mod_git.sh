@@ -18,7 +18,7 @@ vcs_checkout() {
   then
     return 1
   else
-    git clone "$url" $VCSROOT
+    git clone "$URL" $VCSROOT
   fi
 }
 

@@ -41,7 +41,7 @@ vcs_add() {
 
 ## vcs_remove <path>...
 vcs_remove() {
-  git rm "$@"
+  git rm -r "$@"
 }
 
 ## vcs_commit

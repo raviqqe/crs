@@ -180,8 +180,8 @@ backup() {
 exist_dir() {
   if [ -d "$1" ]
   then
-    ugid=`stat -c '%U:%G' "$1"`
-    perm=`stat -c '%a' "$1"`
+    ugid=`stat -f %u:%g "$1"`
+    perm=`stat -f %p "$1" | sed 's/.*\(...\)/\1/'`
   else
     exist_dir `dirname "$1"`
     mkdir "$1"

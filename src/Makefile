@@ -10,7 +10,7 @@ MANDIR = $(DESTDIR)$(MANPREFIX)/man/man1
 
 crs.conf:
 	@echo "creating $@ in $(CONFDIR) from crs.conf.sample"
-	@cp -f crs.conf.sample $(CONFDIR)/$@
+	@test -f $(CONFDIR)/$@ || cp -f crs.conf.sample $(CONFDIR)/$@
 	@chmod 644 $(CONFDIR)/$@
 
 clean:

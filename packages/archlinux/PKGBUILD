@@ -6,9 +6,9 @@ pkgname=crs
 pkgver=0.01
 pkgrel=1
 pkgdesc="wrapper script of VCS commands to manage files"
-url="http://www.raviqqe.com"
-arch=('i686' 'x86_64')
-license=('MIT')
+#url="http://www.raviqqe.com"
+arch=('any')
+license=('unlicensed')
 options=(zipman)
 depends=('svn')
 optdepends=('git: git client command support')
@@ -19,16 +19,8 @@ source=(http://www.raviqqe.com/${pkgname}/${pkgname}-${pkgver}.tar.gz)
 #         '2453e037f46449774ec8afab49b4f1a2'
 #         '939f403a71b6e85261d09fc3412269ee')
 
-build() {
-  cd $srcdir/$pkgname-$pkgver
-  cp $srcdir/config.h config.h
-  sed -i 's/CPPFLAGS =/CPPFLAGS +=/g' config.mk
-  sed -i 's/^CFLAGS = -g/#CFLAGS += -g/g' config.mk
-  sed -i 's/^#CFLAGS = -std/CFLAGS += -std/g' config.mk
-  sed -i 's/^LDFLAGS = -g/#LDFLAGS += -g/g' config.mk
-  sed -i 's/^#LDFLAGS = -s/LDFLAGS += -s/g' config.mk
-  make X11INC=/usr/include/X11 X11LIB=/usr/lib/X11
-}
+#build() {
+#}
 
 package() {
   cd $srcdir/$pkgname-$pkgver

@@ -8,6 +8,7 @@ Installation
 --------------------------------------------------------------------------------
 make install
 
+
 Uninstallation
 --------------------------------------------------------------------------------
 make uninstall
@@ -15,9 +16,9 @@ make uninstall
 
 Files
 --------------------------------------------------------------------------------
-/usr/bin/crs - main shell script
-/etc/crs.conf - crs configuration file
-/var/crs - directory of repository copy
+/usr/local/bin/crs - main shell script
+/usr/local/etc/crs.conf - crs configuration file
+/usr/local/var/crs - directory of repository copy
 
 
 Concept
@@ -26,6 +27,7 @@ crs just backs up and restores files and directories with vcs.
 crs doesn't cover full operation of repository.
 it should be done with each vcs command.
 users should be familiar with the vcs command they use, such as svn and git.
+
 
 Design
 --------------------------------------------------------------------------------
@@ -40,7 +42,6 @@ subsets
   - relative path to files or directories from the directory of repository copy
   - for example when the directory of repository copy is '/var/crs' and there is
     '/var/crs/default/etc' directory the relative path is 'default/etc'.
-
 
 ### command usage
 crs [<option>...] <subcommand> [<option>...] [<argument>...]

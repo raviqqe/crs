@@ -1,5 +1,6 @@
 #!/bin/sh
-# crs
+
+# crs - combat ready status
 # back up and restore files easily
 
 # characters not available in configuration file

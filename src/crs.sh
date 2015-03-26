@@ -21,8 +21,8 @@ MESSAGE="commitment from `hostname`-`uname`"
 : ${PATH:='/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'}
 CONFFILE="/usr/local/etc/${NAME}.conf"
 VCSROOT="/usr/local/var/${NAME}"
-LIBPATH="/usr/local/libexec/${NAME}"
-readonly NAME PATH VCSROOT LIBPATH
+LIBXPATH="/usr/local/libexec/${NAME}"
+readonly NAME PATH VCSROOT LIBXPATH
 
 
 #####################
@@ -401,7 +401,7 @@ test -d $VCSROOT ||
   fail "vcs repository copy, $VCSROOT does not exist"
 
 ## load modules
-tmp=${LIBPATH}'/mod_'${VCSC}'.sh'
+tmp=${LIBXPATH}'/mod_'${VCSC}'.sh'
 if [ -f $tmp ]
 then
   . $tmp
